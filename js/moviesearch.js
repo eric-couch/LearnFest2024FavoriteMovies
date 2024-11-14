@@ -28,8 +28,26 @@ function BuildMovieCard(movie) {
     let movieCardClone = movieCard.cloneNode(true);
     movieCardClone.querySelector("#moviePoster").src = MoviePoster + imdbID;
     movieCardClone.querySelector("#cardBody").firstElementChild.innerText = `${Title} (${Year})`;
+    let favButton = movieCardClone.querySelector("#favBtn");
+    if (favButton != null) {
+        favButton.addEventListener('click', () => {
+            console.log(`Favoriting ${Title}`);
+            AddToFavorites(movie);
+        });
+    }
+
     favMovieList.firstElementChild.appendChild(movieCardClone);
     movieCardClone.style.display = "block";
+}
+
+function AddToFavorites(movie) {
+    let favMoviesStorage = localStorage.getItem("favMovies");
+    if (favMoviesStorage == null) {
+        favMoviesStorage = '[]';
+    }
+    let favMovies = JSON.parse(favMoviesStorage);
+    favMovies.push(movie);
+    localStorage.setItem("favMovies", JSON.stringify(favMovies));
 }
 
 const getMovieData = async () => {
