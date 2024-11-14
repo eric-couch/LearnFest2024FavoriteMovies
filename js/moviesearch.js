@@ -42,7 +42,7 @@ function BuildMovieCard(movie) {
 
 function AddToFavorites(movie) {
     let favMoviesStorage = localStorage.getItem("favMovies");
-    if (favMoviesStorage == null) {
+    if (favMoviesStorage === null) {
         favMoviesStorage = '[]';
     }
     let favMovies = JSON.parse(favMoviesStorage);
